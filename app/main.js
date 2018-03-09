@@ -30,7 +30,7 @@ Leap.loop({ hand: function(hand) {
   // Use the hand data to control the cursor's screen position
   var cursorPosition = hand.screenPosition();
   cursor.setScreenPosition(cursorPosition);
-  var intersectingTile = getIntersectingTile();
+  var intersectingTile = getIntersectingTile(cursor.screenPosition);
   // TODO: 4.1
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile
