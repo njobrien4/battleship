@@ -23,12 +23,12 @@ var isGrabbing = false;
 // Called every time the Leap provides a new frame of data
 Leap.loop({ hand: function(hand) {
   // Clear any highlighting at the beginning of the loop
-  console.log(hand.screenPosition());
+  //console.log(hand.screenPosition());
   unhighlightTiles();
 
   // TODO: 4.1, Moving the cursor with Leap data
   // Use the hand data to control the cursor's screen position
-  var cursorPosition = [0, 0];
+  var cursorPosition = hand.screenPosition();
   cursor.setScreenPosition(cursorPosition);
 
   // TODO: 4.1
