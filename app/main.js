@@ -22,6 +22,7 @@ var isGrabbing = false;
 // MAIN GAME LOOP
 // Called every time the Leap provides a new frame of data
 Leap.loop({ hand: function(hand) {
+  console.log("in the loop");
   // Clear any highlighting at the beginning of the loop
   unhighlightTiles();
 
