@@ -34,7 +34,7 @@ Leap.loop({ hand: function(hand) {
   // TODO: 4.1
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile;
-  highlightTile(selectedTile,GREEN);
+  highlightTile(selectedTile,Colors[GREEN]);
 
   // SETUP mode
   if (gameState.get('state') == 'setup') {
