@@ -35,8 +35,9 @@ Leap.loop({ hand: function(hand) {
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile;
   console.log(selectedTile, "is selected")
-  highlightTile(selectedTile,Colors.GREEN);
-
+  if (selectedTile != undefined){
+    highlightTile(selectedTile,Colors.GREEN);
+  }
   // SETUP mode
   if (gameState.get('state') == 'setup') {
     background.setContent("<h1>battleship</h1><h3 style='color: #7CD3A2;'>deploy ships</h3>");
