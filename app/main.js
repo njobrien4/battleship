@@ -9,7 +9,7 @@ var cursor = new Cursor();
 setupUserInterface();
 
 // selectedTile: The tile that the player is currently hovering above
-var selectedTile = false;
+var selectedTile = true;
 console.log("working");
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
@@ -33,7 +33,7 @@ Leap.loop({ hand: function(hand) {
   var intersectingTile = getIntersectingTile(cursorPosition);
   // TODO: 4.1
   // Get the tile that the player is currently selecting, and highlight it
-  selectedTile = intersectingTile
+  selectedTile = intersectingTile;
 
   // SETUP mode
   if (gameState.get('state') == 'setup') {
