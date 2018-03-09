@@ -9,7 +9,8 @@ var cursor = new Cursor();
 setupUserInterface();
 
 // selectedTile: The tile that the player is currently hovering above
-var selectedTile = true;
+var selectedTile = false;
+console.log("working");
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
 var grabbedShip = false;
@@ -98,13 +99,11 @@ Leap.loop({ hand: function(hand) {
 
     // If playing and CPU's turn, generate a shot
     if (gameState.get('state') == 'playing' && gameState.isCpuTurn() && !gameState.get('waiting')) {
-    // If playing and CPU's turn, generate a shot
-    if (gameState.get('state') == 'playing' && gameState.isCpuTurn() && !gameState.get('waiting')) {
       gameState.set('waiting', true);
       generateCpuShot();
     }
   }
-}}.use('screenPosition', {scale: LEAPSCALE});
+}}).use('screenPosition', {scale: LEAPSCALE});
 
 // processSpeech(transcript)
 //  Is called anytime speech is recognized by the Web Speech API
@@ -239,4 +238,5 @@ var registerCpuShot = function(playerResponse) {
     // TODO: Uncomment nextTurn to move onto the player's next turn
     // nextTurn();
   }
-}
+};
+
