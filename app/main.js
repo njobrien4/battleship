@@ -35,7 +35,7 @@ Leap.loop({ hand: function(hand) {
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile;
   console.log(selectedTile, "is selected")
-  if (selectedTile != undefined){
+  if (selectedTile){
     highlightTile(selectedTile,Colors.GREEN);
   }
   // SETUP mode
