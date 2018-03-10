@@ -43,19 +43,22 @@ Leap.loop({ hand: function(hand) {
     background.setContent("<h1>battleship</h1><h3 style='color: #7CD3A2;'>deploy ships</h3>");
     // TODO: 4.2, Deploying ships
     //  Enable the player to grab, move, rotate, and drop ships to deploy them
-
+    var currentShip = getIntersectingShipAndOffset(cursorPosition);
     // First, determine if grabbing pose or not
     isGrabbing = false;
-
+    console.log(hand.grabStrength(), "is grab strength");
+    console.log(hand.pinchStrength(), "is pinch strength");
     // Grabbing, but no selected ship yet. Look for one.
     // TODO: Update grabbedShip/grabbedOffset if the user is hovering over a ship
     if (!grabbedShip && isGrabbing) {
+      var currentShip = getIntersectingShipAndOffset(cursorPosition);
+      grabbedShip = currentShip;
     }
 
     // Has selected a ship and is still holding it
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
-      grabbedShip.setScreenPosition([0,0]);
+      grabbedShip.setScreenPosition(cursorPosition;
       grabbedShip.setScreenRotation(0);
     }
 
