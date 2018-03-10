@@ -73,7 +73,7 @@ Leap.loop({ hand: function(hand) {
     // TODO: Try placing the ship on the board and release the ship
     else if (grabbedShip && !isGrabbing) {
       grabbedShip=false;
-      
+
     }
   }
 
@@ -125,9 +125,10 @@ Leap.loop({ hand: function(hand) {
 //  Is called anytime speech is recognized by the Web Speech API
 // Input: 
 //    transcript, a string of possibly multiple words that were recognized
-// Output: 
+// Output:  
 //    processed, a boolean indicating whether the system reacted to the speech or not
 var processSpeech = function(transcript) {
+  console.log("processing transcript", transcript);
   // Helper function to detect if any commands appear in a string
   var userSaid = function(str, commands) {
     for (var i = 0; i < commands.length; i++) {
@@ -141,6 +142,7 @@ var processSpeech = function(transcript) {
   if (gameState.get('state') == 'setup') {
     // TODO: 4.3, Starting the game with speech
     // Detect the 'start' command, and start the game if it was said
+    var userSaidStart = userSaid
     if (false) {
       gameState.startGame();
       processed = true;
