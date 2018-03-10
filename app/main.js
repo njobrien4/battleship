@@ -72,6 +72,8 @@ Leap.loop({ hand: function(hand) {
     // Finished moving a ship. Release it, and try placing it.
     // TODO: Try placing the ship on the board and release the ship
     else if (grabbedShip && !isGrabbing) {
+      grabbedShip=false;
+      
     }
   }
 
