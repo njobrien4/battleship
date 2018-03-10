@@ -48,6 +48,7 @@ Leap.loop({ hand: function(hand) {
     isGrabbing = false;
     console.log(hand.GrabStrength, "is grab strength");
     console.log(hand.PinchStrength, "is pinch strength");
+    console.log(hand)
     // Grabbing, but no selected ship yet. Look for one.
     // TODO: Update grabbedShip/grabbedOffset if the user is hovering over a ship
     if (!grabbedShip && isGrabbing) {
