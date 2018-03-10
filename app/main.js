@@ -204,6 +204,7 @@ var registerPlayerShot = function() {
     // Sunk ship
     else if (result.sunkShip) {
       var shipName = result.sunkShip.get('type');
+      console.log('shipname is: ', shipName);
       generateSpeech('you sunk my', shipName);
     }
     // Hit or miss
