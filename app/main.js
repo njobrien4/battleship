@@ -9,7 +9,7 @@ var cursor = new Cursor();
 setupUserInterface();
 
 // selectedTile: The tile that the player is currently hovering above
-var selectedTile = true;
+var selectedTile = false;
 console.log("working");
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
@@ -142,8 +142,9 @@ var processSpeech = function(transcript) {
   if (gameState.get('state') == 'setup') {
     // TODO: 4.3, Starting the game with speech
     // Detect the 'start' command, and start the game if it was said
-    var userSaidStart = userSaid
-    if (false) {
+    var userSaidStart = userSaid(transcript, ['start']);
+    if (userSaidStart) {
+      console.log("start detected")
       gameState.startGame();
       processed = true;
     }
@@ -153,7 +154,8 @@ var processSpeech = function(transcript) {
     if (gameState.isPlayerTurn()) {
       // TODO: 4.4, Player's turn
       // Detect the 'fire' command, and register the shot if it was said
-      if (false) {
+      var userSaidFire = userSaid(transcript, ['fire']);
+      if (userSaidFire) {
         registerPlayerShot();
 
         processed = true;
@@ -181,6 +183,7 @@ var processSpeech = function(transcript) {
 var registerPlayerShot = function() {
   // TODO: CPU should respond if the shot was off-board
   if (!selectedTile) {
+    console.log("shot was off board");
   }
 
   // If aiming at a tile, register the player's shot
@@ -194,21 +197,24 @@ var registerPlayerShot = function() {
     // TODO: Generate CPU feedback in three cases
     // Game over
     if (result.isGameOver) {
+      generateSpeech('game over');
       gameState.endGame("player");
       return;
     }
     // Sunk ship
     else if (result.sunkShip) {
       var shipName = result.sunkShip.get('type');
+      generateSpeech('you sunk my', shipName);
     }
     // Hit or miss
     else {
       var isHit = result.shot.get('isHit');
+      generateSpeech('hit');
     }
 
     if (!result.isGameOver) {
       // TODO: Uncomment nextTurn to move onto the CPU's turn
-      // nextTurn();
+       //nextTurn();
     }
   }
 };
@@ -218,7 +224,7 @@ var registerPlayerShot = function() {
 var cpuShot;
 var generateCpuShot = function() {
   // Generate a random CPU shot
-  cpuShot = gameState.getCpuShot();
+  cpuShot = gameState.getCpuShot();generateSpeech('you sunk my', currentShip.type);
   var tile = cpuShot.get('position');
   var rowName = ROWNAMES[tile.row]; // e.g. "A"
   var colName = COLNAMES[tile.col]; // e.g. "5"
