@@ -209,7 +209,13 @@ var registerPlayerShot = function() {
     // Hit or miss
     else {
       var isHit = result.shot.get('isHit');
-      generateSpeech('hit');
+      if (isHit){
+        generateSpeech('hit');
+      }
+      else {
+        generateSpeech('miss');
+      }
+      
     }
 
     if (!result.isGameOver) {
