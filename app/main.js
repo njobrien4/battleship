@@ -232,7 +232,7 @@ var registerPlayerShot = function() {
 var cpuShot;
 var generateCpuShot = function() {
   // Generate a random CPU shot
-  cpuShot = gameState.getCpuShot();generateSpeech('you sunk my', currentShip.type);
+  cpuShot = gameState.getCpuShot();
   var tile = cpuShot.get('position');
   var rowName = ROWNAMES[tile.row]; // e.g. "A"
   var colName = COLNAMES[tile.col]; // e.g. "5"
