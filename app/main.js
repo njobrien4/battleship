@@ -46,21 +46,27 @@ Leap.loop({ hand: function(hand) {
     var currentShip = getIntersectingShipAndOffset(cursorPosition);
     // First, determine if grabbing pose or not
     isGrabbing = false;
+
     console.log(hand.grabStrength, "is grab strength");
     console.log(hand.pinchStrength, "is pinch strength");
-
+    if (hand.grabStrength > 0.75 || hand.pinchStrength >0.75){
+      isGrabbing=true;
+    }
     // Grabbing, but no selected ship yet. Look for one.
     // TODO: Update grabbedShip/grabbedOffset if the user is hovering over a ship
     if (!grabbedShip && isGrabbing) {
       var currentShip = getIntersectingShipAndOffset(cursorPosition);
-      grabbedShip = currentShip;
+      grabbedShip = currentShip.ship;
+      grabbedOffset = currentShip.offset;
     }
 
     // Has selected a ship and is still holding it
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
-      grabbedShip.setScreenPosition(cursorPosition);
-      grabbedShip.setScreenRotation(0);
+      grabbedShip.setScreenPosition([cursorPosition[0]+grabbedOffset[0],currentPosition[1]+grabbedOffset[1]]);
+      grabbedShip.setScreenRotation(hand.roll());
+      console.log(hand, "is hand");
+      console.log(hand.roll(), "is hand roll");
     }
 
     // Finished moving a ship. Release it, and try placing it.
