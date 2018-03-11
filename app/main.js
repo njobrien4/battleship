@@ -22,10 +22,12 @@ var isGrabbing = false;
 
 var shift_angle =  function(original_angle){
     while (!(-Math.PI<=original_angle && original_angle<=Math.PI)){
-        if original_angle<0:
-            original_angle+=math.pi
-        else:
-            original_angle-=math.pi
+        if (original_angle<0){
+          original_angle+=Math.PI;
+        }
+        else{
+            original_angle-=Math.PI;
+        }
     return original_angle
   }
 };
