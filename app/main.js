@@ -58,13 +58,14 @@ Leap.loop({ hand: function(hand) {
       var currentShip = getIntersectingShipAndOffset(cursorPosition);
       grabbedShip = currentShip.ship;
       grabbedOffset = currentShip.offset;
+      var handRollInitial = hand.roll();
     }
 
     // Has selected a ship and is still holding it
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      grabbedShip.setScreenRotation(-hand.roll());
+      grabbedShip.setScreenRotation(handRollInitial-hand.roll());
       console.log(hand, "is hand");
       console.log(hand.roll(), "is hand roll");
     }
@@ -167,6 +168,10 @@ var processSpeech = function(transcript) {
       // TODO: 4.5, CPU's turn
       // Detect the player's response to the CPU's shot: hit, miss, you sunk my ..., game over
       // and register the CPU's shot if it was said
+      var userSaidHit = userSaid(transcipt, ['hit']);
+      var userSaidMiss = userSaid(transcript, ['miss']);
+      var userSaidYouSunk = userSaid(transcript, ['you sunk my'])
+
       if (false) {
         var response = "playerResponse";
         registerCpuShot(response);
@@ -206,7 +211,7 @@ var registerPlayerShot = function() {
     else if (result.sunkShip) {
       var shipName = result.sunkShip.get('type');
       console.log('shipname is: ', shipName);
-      generateSpeech('you sunk my', shipName);
+      generateSpeech('you sunk my '+shipName);
     }
     // Hit or miss
     else {
@@ -222,7 +227,7 @@ var registerPlayerShot = function() {
 
     if (!result.isGameOver) {
       // TODO: Uncomment nextTurn to move onto the CPU's turn
-       //nextTurn();
+       nextTurn();
     }
   }
 };
@@ -236,6 +241,8 @@ var generateCpuShot = function() {
   var tile = cpuShot.get('position');
   var rowName = ROWNAMES[tile.row]; // e.g. "A"
   var colName = COLNAMES[tile.col]; // e.g. "5"
+  generateSpeech('fire '+rowName+' '+colName);
+  blinkTile(tile);
 
   // TODO: Generate speech and visual cues for CPU shot
 };
@@ -268,7 +275,7 @@ var registerCpuShot = function(playerResponse) {
 
   if (!result.isGameOver) {
     // TODO: Uncomment nextTurn to move onto the player's next turn
-    // nextTurn();
+    nextTurn();
   }
 };
 
