@@ -11,7 +11,6 @@ setupUserInterface();
 // selectedTile: The tile that the player is currently hovering above
 var selectedTile = false;
 console.log("working");
-var handRollInitial = false;
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
 var grabbedShip = false;
@@ -35,7 +34,7 @@ Leap.loop({ hand: function(hand) {
   // TODO: 4.1
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile;
-  //console.log(selectedTile, "is selected")
+  console.log(selectedTile, "is selected")
   if (selectedTile){
     highlightTile(selectedTile,Colors.GREEN);
   }
@@ -48,8 +47,8 @@ Leap.loop({ hand: function(hand) {
     // First, determine if grabbing pose or not
     isGrabbing = false;
 
-    //console.log(hand.grabStrength, "is grab strength");
-    //console.log(hand.pinchStrength, "is pinch strength");
+    console.log(hand.grabStrength, "is grab strength");
+    console.log(hand.pinchStrength, "is pinch strength");
     if (hand.grabStrength > 0.75 || hand.pinchStrength >0.75){
       isGrabbing=true;
     }
@@ -59,33 +58,14 @@ Leap.loop({ hand: function(hand) {
       var currentShip = getIntersectingShipAndOffset(cursorPosition);
       grabbedShip = currentShip.ship;
       grabbedOffset = currentShip.offset;
-      handRollInitial = hand.roll();
+      var handRollInitial = hand.roll();
     }
 
     // Has selected a ship and is still holding it
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      var roll = hand.roll()-handRollInitial;
-      //rotate 90, 180, 270 counterclockwise
-      console.log(hand.roll(), handRollInitial, roll);
-      if (roll<Math.PI/4 && roll>-Math.PI/4){
-        console.log("1");
-        console.log(grabbedShip.get('rotation'), ' is rotation');
-        grabbedShip.setScreenRotation(0);
-      }
-      else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
-        console.log("2");
-        grabbedShip.setScreenRotation(Math.PI/2);
-      }
-      else if (roll>=3*Math.PI/4 || roll<-3*Math.PI/4){
-        console.log("3");
-        grabbedShip.setScreenRotation(Math.PI);
-      }
-      else {
-        console.log("4");
-        grabbedShip.setScreenRotation(-Math.PI/2);
-      }
+      grabbedShip.setScreenRotation(hand.roll()-handRollInitial);
       console.log(hand, "is hand");
       console.log(hand.roll(), "is hand roll");
     }
