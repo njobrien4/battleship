@@ -20,6 +20,14 @@ var grabbedOffset = [0, 0];
 // isGrabbing: Is the player's hand currently in a grabbing pose
 var isGrabbing = false;
 
+var shift_angle =  function(original_angle){
+    while not (-math.pi<=original_angle<=math.pi):
+        if original_angle<0:
+            original_angle+=math.pi
+        else:
+            original_angle-=math.pi
+    return original_angle
+};
 // MAIN GAME LOOP
 // Called every time the Leap provides a new frame of data
 Leap.loop({ hand: function(hand) {
@@ -66,11 +74,11 @@ Leap.loop({ hand: function(hand) {
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      var roll = hand.roll()-handRollInitial;
+      var roll = shift_angle(hand.roll())-handRollInitial;
       //rotate 90, 180, 270 counterclockwise
       console.log(hand.roll(), handRollInitial, roll);
       if (roll>0.2 ||roll<-0.2){
-        grabbedShip.setScreenRotation(grabbedShip.get('screenRotation')-roll)
+        grabbedShip.setScreenRotation(shift_angle(grabbedShip.get('screenRotation'))-shift_angle(roll))
       }
      // grabbedShip.setScreenRotation(grabbedShip.get('screenRotation')-hand.roll());
       if (roll<Math.PI/4 && roll>-Math.PI/4){
