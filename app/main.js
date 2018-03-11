@@ -216,7 +216,7 @@ var processSpeech = function(transcript) {
       var userSaidYouSunk = userSaid(transcript, ['you sunk']);
 
       if (userSaidHit || userSaidMiss || userSaidYouSunk) {
-        var response = "playerResponse";
+        var response = [userSaidHit, userSaidMiss, userSaidYouSunk];
         registerCpuShot(response);
 
         processed = true;
@@ -293,7 +293,8 @@ var generateCpuShot = function() {
 // TODO: 4.5, CPU's turn
 // Generate CPU speech in response to the player's response
 // E.g. CPU takes shot, then player responds with "hit" ==> CPU could then say "AWESOME!"
-var registerCpuShot = function(playerResponse) {
+var registerCpuShot = function(playerResponse) 
+  console.log(playerResponse, "is player response");
   // Cancel any blinking
   unblinkTiles();
   var result = playerBoard.fireShot(cpuShot);
