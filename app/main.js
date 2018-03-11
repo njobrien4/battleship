@@ -48,8 +48,8 @@ Leap.loop({ hand: function(hand) {
     // First, determine if grabbing pose or not
     isGrabbing = false;
 
-    console.log(hand.grabStrength, "is grab strength");
-    console.log(hand.pinchStrength, "is pinch strength");
+    //console.log(hand.grabStrength, "is grab strength");
+    //console.log(hand.pinchStrength, "is pinch strength");
     if (hand.grabStrength > 0.75 || hand.pinchStrength >0.75){
       isGrabbing=true;
     }
@@ -66,13 +66,25 @@ Leap.loop({ hand: function(hand) {
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      var roll = handRollInitial-hand.roll();
+      var roll = hand.roll()-handRollInitial;
       //rotate 90, 180, 270 counterclockwise
-      console.log([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      console.log(grabbedShip);
       console.log(hand.roll(), handRollInitial, roll);
-      grabbedShip.setScreenRotation(grabbedShip.get('rotation')+hand.roll());
-      
+      if (roll<Math.PI/4 && roll>-Math.PI/4){
+        console.log("1");
+        grabbedShip.setScreenRotation(0);
+      }
+      else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
+        console.log("2");
+        grabbedShip.setScreenRotation(Math.PI/2);
+      }
+      else if (roll>=3*Math.PI/4 || roll<-3*Math.PI/4){
+        console.log("3");
+        grabbedShip.setScreenRotation(Math.PI);
+      }
+      else {
+        console.log("4");
+        grabbedShip.setScreenRotation(-Math.PI/2);
+      }
       console.log(hand, "is hand");
       console.log(hand.roll(), "is hand roll");
     }
