@@ -28,8 +28,8 @@ var shift_angle =  function(original_angle){
         else{
             original_angle-=Math.PI;
         }
-    return original_angle
-  }
+    }
+   return original_angle
 };
 // MAIN GAME LOOP
 // Called every time the Leap provides a new frame of data
