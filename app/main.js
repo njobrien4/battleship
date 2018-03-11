@@ -11,6 +11,7 @@ setupUserInterface();
 // selectedTile: The tile that the player is currently hovering above
 var selectedTile = false;
 console.log("working");
+var handRollInitial = false;
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
 var grabbedShip = false;
@@ -58,7 +59,7 @@ Leap.loop({ hand: function(hand) {
       var currentShip = getIntersectingShipAndOffset(cursorPosition);
       grabbedShip = currentShip.ship;
       grabbedOffset = currentShip.offset;
-      var handRollInitial = hand.roll();
+      handRollInitial = hand.roll();
     }
 
     // Has selected a ship and is still holding it
