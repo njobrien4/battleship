@@ -69,6 +69,7 @@ Leap.loop({ hand: function(hand) {
       var roll = handRollInitial-hand.roll();
       //rotate 90, 180, 270 counterclockwise
       console.log([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
+      console.log(grabbedShip);
       console.log(hand.roll(), handRollInitial, roll);
       grabbedShip.setScreenRotation(grabbedShip.get('rotation')+hand.roll());
       
