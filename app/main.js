@@ -190,9 +190,9 @@ var processSpeech = function(transcript) {
       // and register the CPU's shot if it was said
       var userSaidHit = userSaid(transcript, ['hit']);
       var userSaidMiss = userSaid(transcript, ['miss']);
-      var userSaidYouSunk = userSaid(transcript, ['you sunk my'])
+      var userSaidYouSunk = userSaid(transcript, ['you sunk']);
 
-      if (false) {
+      if (userSaidHit || userSaidMiss || userSaidYouSunk) {
         var response = "playerResponse";
         registerCpuShot(response);
 
