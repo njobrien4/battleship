@@ -65,7 +65,20 @@ Leap.loop({ hand: function(hand) {
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      grabbedShip.setScreenRotation(handRollInitial-hand.roll());
+      var roll = hand.roll()-handRollInitial
+      //rotate 90, 180, 270 counterclockwise
+      if (roll<Math.PI/4 && roll>-Math.PI/4){
+        grabbedShip.setScreenRotation(0);
+      }
+      else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
+        grabbedShip.setScreenRotation(Math.PI/2);
+      }
+      else if(roll>=3*Math.PI/4 or roll<-3*Math.PI/4){
+        grabbedShip.setScreenRotation(PI)
+      }
+      else {
+        grabbedShip.setScreenRotation(-Math.PI/2);
+      }
       console.log(hand, "is hand");
       console.log(hand.roll(), "is hand roll");
     }
