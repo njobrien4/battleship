@@ -71,7 +71,8 @@ Leap.loop({ hand: function(hand) {
       console.log(hand.roll(), handRollInitial, roll);
       if (roll<Math.PI/4 && roll>-Math.PI/4){
         console.log("1");
-        grabbedShip.setScreenRotation(0);
+        console.log(grabbedShip.get('rotation'), ' is rotation');
+        grabbedShip.setScreenRotation();
       }
       else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
         console.log("2");
