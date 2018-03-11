@@ -21,12 +21,13 @@ var grabbedOffset = [0, 0];
 var isGrabbing = false;
 
 var shift_angle =  function(original_angle){
-    while not (-math.pi<=original_angle<=math.pi):
+    while (!(-Math.PI<=original_angle<=Math.PI)){
         if original_angle<0:
             original_angle+=math.pi
         else:
             original_angle-=math.pi
     return original_angle
+  }
 };
 // MAIN GAME LOOP
 // Called every time the Leap provides a new frame of data
