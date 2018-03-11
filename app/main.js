@@ -34,7 +34,7 @@ Leap.loop({ hand: function(hand) {
   // TODO: 4.1
   // Get the tile that the player is currently selecting, and highlight it
   selectedTile = intersectingTile;
-  console.log(selectedTile, "is selected")
+  //console.log(selectedTile, "is selected")
   if (selectedTile){
     highlightTile(selectedTile,Colors.GREEN);
   }
@@ -47,8 +47,8 @@ Leap.loop({ hand: function(hand) {
     // First, determine if grabbing pose or not
     isGrabbing = false;
 
-    console.log(hand.grabStrength, "is grab strength");
-    console.log(hand.pinchStrength, "is pinch strength");
+    #//console.log(hand.grabStrength, "is grab strength");
+    //console.log(hand.pinchStrength, "is pinch strength");
     if (hand.grabStrength > 0.75 || hand.pinchStrength >0.75){
       isGrabbing=true;
     }
