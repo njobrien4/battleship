@@ -47,7 +47,7 @@ Leap.loop({ hand: function(hand) {
     // First, determine if grabbing pose or not
     isGrabbing = false;
 
-    #//console.log(hand.grabStrength, "is grab strength");
+    //console.log(hand.grabStrength, "is grab strength");
     //console.log(hand.pinchStrength, "is pinch strength");
     if (hand.grabStrength > 0.75 || hand.pinchStrength >0.75){
       isGrabbing=true;
