@@ -67,16 +67,21 @@ Leap.loop({ hand: function(hand) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
       var roll = hand.roll()-handRollInitial;
       //rotate 90, 180, 270 counterclockwise
+      console.log(hand.roll(), handRollInitial, roll);
       if (roll<Math.PI/4 && roll>-Math.PI/4){
+        console.log("1");
         grabbedShip.setScreenRotation(0);
       }
       else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
+        console.log("2");
         grabbedShip.setScreenRotation(Math.PI/2);
       }
       else if (roll>=3*Math.PI/4 || roll<-3*Math.PI/4){
+        console.log("3");
         grabbedShip.setScreenRotation(PI);
       }
       else {
+        console.log("4");
         grabbedShip.setScreenRotation(-Math.PI/2);
       }
       console.log(hand, "is hand");
