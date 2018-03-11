@@ -84,8 +84,12 @@ Leap.loop({ hand: function(hand) {
       console.log(hand.roll(), handRollInitial, roll);
       tenHandRolls.splice(0,1);
       tenHandRolls.push(hand.roll());
-      average = Math.average(tenHandRolls);
-      grabbedShip.setScreenRotation(average);
+      var total = 0;
+      for(var i = 0; i < tenHandRolls.length; i++) {
+      total += tenHandRolls[i];
+        }
+      var avg = total / tenHandRolls.length;
+      grabbedShip.setScreenRotation(avg);
       
      // grabbedShip.setScreenRotation(grabbedShip.get('screenRotation')-hand.roll());
       if (roll<Math.PI/4 && roll>-Math.PI/4){
