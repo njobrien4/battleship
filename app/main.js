@@ -199,7 +199,7 @@ var processSpeech = function(transcript) {
     if (gameState.isPlayerTurn()) {
       // TODO: 4.4, Player's turn
       // Detect the 'fire' command, and register the shot if it was said
-      var userSaidFire = userSaid(transcript, ['fire', 'spider']);
+      var userSaidFire = userSaid(transcript.toLowerCase(), ['fire', 'spider']);
       if (userSaidFire) {
         registerPlayerShot();
 
@@ -211,9 +211,9 @@ var processSpeech = function(transcript) {
       // TODO: 4.5, CPU's turn
       // Detect the player's response to the CPU's shot: hit, miss, you sunk my ..., game over
       // and register the CPU's shot if it was said
-      var userSaidHit = userSaid(transcript, ['hit']);
-      var userSaidMiss = userSaid(transcript, ['miss', 'mass']);
-      var userSaidYouSunk = userSaid(transcript, ['you sunk']);
+      var userSaidHit = userSaid(transcript.toLowerCase(), ['hit']);
+      var userSaidMiss = userSaid(transcript.toLowerCase(), ['miss', 'mass','mess']);
+      var userSaidYouSunk = userSaid(transcript.toLowerCase(), ['you sunk']);
 
       if (userSaidHit || userSaidMiss || userSaidYouSunk) {
         var response = [userSaidHit, userSaidMiss, userSaidYouSunk];
@@ -294,6 +294,9 @@ var generateCpuShot = function() {
 // Generate CPU speech in response to the player's response
 // E.g. CPU takes shot, then player responds with "hit" ==> CPU could then say "AWESOME!"
 var registerCpuShot = function(playerResponse) {
+  userSaidHit = playerResponse[0];
+  userSaidMiss = playerResponse[1];
+  userSaidYouSunk= playerResponse[2];
   console.log(playerResponse, "is player response");
   // Cancel any blinking
   unblinkTiles();
@@ -305,16 +308,30 @@ var registerCpuShot = function(playerResponse) {
   // TODO: Generate CPU feedback in three cases
   // Game over
   if (result.isGameOver) {
+    if (userSaidMiss){
+    generateSpeech("You're no fun to play with.")
+  }
+    generateSpeech("I win, hell yeah! better luck next time, loser!");
     gameState.endGame("cpu");
     return;
   }
   // Sunk ship
   else if (result.sunkShip) {
+    if(userSaidMiss){
+      generateSpeech("you're not gonna win by cheating!");
+    }
+    generateSpeech("hell yeah");
     var shipName = result.sunkShip.get('type');
   }
   // Hit or miss
   else {
     var isHit = result.shot.get('isHit');
+    if (isHit && !userSaidHit){
+      generateSpeech("cheaters never win and winners never cheat!");
+    }
+    else if (!isHit && !userSaidMiss){
+      generateSpeech("you can't trick me, I'm a computer");
+    }
   }
 
   if (!result.isGameOver) {
