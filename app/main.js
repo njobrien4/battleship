@@ -80,9 +80,8 @@ Leap.loop({ hand: function(hand) {
       var roll = shift_angle(hand.roll())-handRollInitial;
       //rotate 90, 180, 270 counterclockwise
       console.log(hand.roll(), handRollInitial, roll);
-      if (roll>0.2 ||roll<-0.2){
-        grabbedShip.setScreenRotation(shift_angle(grabbedShip.get('screenRotation'))-shift_angle(roll))
-      }
+      grabbedShip.setScreenRotation(shift_angle(grabbedShip.get('screenRotation'))-shift_angle(roll))
+      
      // grabbedShip.setScreenRotation(grabbedShip.get('screenRotation')-hand.roll());
       if (roll<Math.PI/4 && roll>-Math.PI/4){
         console.log("1");
