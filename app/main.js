@@ -20,7 +20,7 @@ var grabbedOffset = [0, 0];
 // isGrabbing: Is the player's hand currently in a grabbing pose
 var isGrabbing = false;
 
-var tenHandRolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var tenHandRolls = [0, 0, 0];
 
 var shift_angle =  function(original_angle){
     while (!(-Math.PI<=original_angle && original_angle<=Math.PI)){
