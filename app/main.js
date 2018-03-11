@@ -186,7 +186,7 @@ var processSpeech = function(transcript) {
   if (gameState.get('state') == 'setup') {
     // TODO: 4.3, Starting the game with speech
     // Detect the 'start' command, and start the game if it was said
-    var userSaidStart = userSaid(transcript, ['start']);
+    var userSaidStart = userSaid(transcript.toLowerCase(), ['start']);
     if (userSaidStart) {
       console.log("start detected");
       gameState.startGame();
@@ -199,7 +199,7 @@ var processSpeech = function(transcript) {
     if (gameState.isPlayerTurn()) {
       // TODO: 4.4, Player's turn
       // Detect the 'fire' command, and register the shot if it was said
-      var userSaidFire = userSaid(transcript, ['fire']);
+      var userSaidFire = userSaid(transcript, ['fire', 'spider']);
       if (userSaidFire) {
         registerPlayerShot();
 
@@ -212,7 +212,7 @@ var processSpeech = function(transcript) {
       // Detect the player's response to the CPU's shot: hit, miss, you sunk my ..., game over
       // and register the CPU's shot if it was said
       var userSaidHit = userSaid(transcript, ['hit']);
-      var userSaidMiss = userSaid(transcript, ['miss']);
+      var userSaidMiss = userSaid(transcript, ['miss', 'mass']);
       var userSaidYouSunk = userSaid(transcript, ['you sunk']);
 
       if (userSaidHit || userSaidMiss || userSaidYouSunk) {
