@@ -58,14 +58,13 @@ Leap.loop({ hand: function(hand) {
       var currentShip = getIntersectingShipAndOffset(cursorPosition);
       grabbedShip = currentShip.ship;
       grabbedOffset = currentShip.offset;
-      var handRollInitial = hand.roll();
     }
 
     // Has selected a ship and is still holding it
     // TODO: Move the ship
     else if (grabbedShip && isGrabbing) {
       grabbedShip.setScreenPosition([cursorPosition[0]-grabbedOffset[0],cursorPosition[1]-grabbedOffset[1]]);
-      grabbedShip.setScreenRotation(hand.roll()-handRollInitial);
+      grabbedShip.setScreenRotation(-hand.roll());
       console.log(hand, "is hand");
       console.log(hand.roll(), "is hand roll");
     }
@@ -275,7 +274,7 @@ var registerCpuShot = function(playerResponse) {
 
   if (!result.isGameOver) {
     // TODO: Uncomment nextTurn to move onto the player's next turn
-    nextTurn();
+    // nextTurn();
   }
 };
 
