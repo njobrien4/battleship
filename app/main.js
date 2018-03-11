@@ -74,7 +74,7 @@ Leap.loop({ hand: function(hand) {
         grabbedShip.setScreenRotation(Math.PI/2);
       }
       else if(roll>=3*Math.PI/4 or roll<-3*Math.PI/4){
-        grabbedShip.setScreenRotation(PI)
+        grabbedShip.setScreenRotation(PI);
       }
       else {
         grabbedShip.setScreenRotation(-Math.PI/2);
