@@ -10,7 +10,6 @@ setupUserInterface();
 
 // selectedTile: The tile that the player is currently hovering above
 var selectedTile = false;
-console.log("working");
 var handRollInitial = false;
 
 // grabbedShip/Offset: The ship and offset if player is currently manipulating a ship
@@ -93,25 +92,6 @@ Leap.loop({ hand: function(hand) {
       var avg = total / tenHandRolls.length;
       grabbedShip.setScreenRotation(-avg);
       
-     // grabbedShip.setScreenRotation(grabbedShip.get('screenRotation')-hand.roll());
-      if (roll<Math.PI/4 && roll>-Math.PI/4){
-        console.log("1");
-        //console.log(grabbedShip.get('screenRotation'), ' is rotation');
-        //grabbedShip.setScreenRotation(0);
-      } else if (roll>=Math.PI/4 && roll <3*Math.PI/4){
-        console.log("2");
-        //grabbedShip.setScreenRotation(Math.PI/2);
-      }
-      else if (roll>=3*Math.PI/4 || roll<-3*Math.PI/4){
-        console.log("3");
-        //grabbedShip.setScreenRotation(Math.PI);
-      }
-      else {
-        console.log("4");
-        //grabbedShip.setScreenRotation(-Math.PI/2);
-      }
-      console.log(hand, "is hand");
-      console.log(hand.roll(), "is hand roll");
     }
 
     // Finished moving a ship. Release it, and try placing it.
