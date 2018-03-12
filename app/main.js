@@ -195,9 +195,10 @@ var processSpeech = function(transcript) {
       var userSaidHit = userSaid(transcript.toLowerCase(), ['hit']);
       var userSaidMiss = userSaid(transcript.toLowerCase(), ['miss', 'mass','mess']);
       var userSaidYouSunk = userSaid(transcript.toLowerCase(), ['you sunk']);
+      var userSaidGameOver = userSaid(transcript.toLowerCase(), ['game over']);
 
-      if (userSaidHit || userSaidMiss || userSaidYouSunk) {
-        var response = [userSaidHit, userSaidMiss, userSaidYouSunk];
+      if (userSaidHit || userSaidMiss || userSaidYouSunk || userSaidGameOver) {
+        var response = [userSaidHit, userSaidMiss, userSaidYouSunk, userSaidGameOver];
         registerCpuShot(response);
 
         processed = true;
@@ -278,6 +279,7 @@ var registerCpuShot = function(playerResponse) {
   userSaidHit = playerResponse[0];
   userSaidMiss = playerResponse[1];
   userSaidYouSunk= playerResponse[2];
+  userSaidGameOver = playerResponse[3];
   console.log(playerResponse, "is player response");
   // Cancel any blinking
   unblinkTiles();
