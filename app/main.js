@@ -214,7 +214,7 @@ var processSpeech = function(transcript) {
 var registerPlayerShot = function() {
   // TODO: CPU should respond if the shot was off-board
   if (!selectedTile) {
-    console.log("shot was off board");
+    generateSpeech("shoot on the board this time!");
   }
 
   // If aiming at a tile, register the player's shot
