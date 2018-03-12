@@ -22,6 +22,8 @@ var isGrabbing = false;
 
 var tenHandRolls = [0, 0, 0];
 
+var consecutiveCpuMisses = 0;
+
 var shift_angle =  function(original_angle){
     while (!(-Math.PI<=original_angle && original_angle<=Math.PI)){
         if (original_angle<0){
@@ -190,7 +192,6 @@ var processSpeech = function(transcript) {
     if (userSaidStart) {
       console.log("start detected");
       gameState.startGame();
-      console.log("game started?");
       processed = true;
     }
   }
@@ -246,7 +247,7 @@ var registerPlayerShot = function() {
     // TODO: Generate CPU feedback in three cases
     // Game over
     if (result.isGameOver) {
-      generateSpeech('game over');
+      generateSpeech('Damn it, game over. I want a rematch.');
       gameState.endGame("player");
       return;
     }
@@ -254,7 +255,7 @@ var registerPlayerShot = function() {
     else if (result.sunkShip) {
       var shipName = result.sunkShip.get('type');
       console.log('shipname is: ', shipName);
-      generateSpeech('you sunk my '+shipName);
+      generateSpeech('Oh shit, you sunk my '+shipName);
     }
     // Hit or miss
     else {
@@ -326,6 +327,12 @@ var registerCpuShot = function(playerResponse) {
   // Hit or miss
   else {
     var isHit = result.shot.get('isHit');
+    if (!isHit){
+      consecutiveCpuMisses+=1;
+    }
+    if (consecutiveCpuMisses=>4){
+      generateSpeech("You're kidding me, another miss");
+    }
     if (isHit && !userSaidHit){
       generateSpeech("cheaters never win and winners never cheat!");
     }
