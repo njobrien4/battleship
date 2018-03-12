@@ -310,9 +310,6 @@ var registerCpuShot = function(playerResponse) {
     if (!isHit){
       consecutiveCpuMisses+=1;
     }
-    if (consecutiveCpuMisses=>4){
-      generateSpeech("You're kidding me, another miss");
-    }
     if (isHit && !userSaidHit){
       generateSpeech("cheaters never win and winners never cheat!");
     }
