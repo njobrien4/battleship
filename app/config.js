@@ -17,5 +17,5 @@ var TURNDELAY = 2500;
 
 var VOICEINDEX = 17; // US English
 var LEAPSCALE = 0.6;
-var DEBUGSPEECH = true;
+var DEBUGSPEECH = false;
 var SKIPSETUP = false;
